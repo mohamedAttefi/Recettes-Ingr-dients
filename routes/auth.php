@@ -1,22 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
 
+Route::post("login", [AuthController::class, "login"])->name("login");
 
-Route::get('login', function () {
-    return view('auth.login');
-})->name('login');
+Route::get('register', [AuthController::class, "showRegisterForm"])->name("register.form");
+Route::get('login', [AuthController::class, "showLoginForm"])->name("login.form");
 
-Route::post('login', function () {});
-
-Route::get('register', function () {
-    return view('auth.register');
-})->name('register');
-
-Route::post('register', function () {});
-
-
-
-Route::post('logout', function () {
-    // Logout logic will be added here
-})->name('logout');
+Route::post('register', [AuthController::class, "register"])->name("register");
