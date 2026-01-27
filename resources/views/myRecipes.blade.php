@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -253,17 +254,32 @@
             animation: fadeInUp 0.5s ease-out backwards;
         }
 
-        .recipe-card:nth-child(1) { animation-delay: 0s; }
-        .recipe-card:nth-child(2) { animation-delay: 0.1s; }
-        .recipe-card:nth-child(3) { animation-delay: 0.2s; }
-        .recipe-card:nth-child(4) { animation-delay: 0.3s; }
-        .recipe-card:nth-child(5) { animation-delay: 0.4s; }
+        .recipe-card:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .recipe-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .recipe-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .recipe-card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .recipe-card:nth-child(5) {
+            animation-delay: 0.4s;
+        }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -714,6 +730,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
@@ -855,117 +872,30 @@
                                 <span class="filter-count">3</span>
                             </div>
                         </div>
-
-                        <!-- Difficulty -->
-                        <div class="filter-section">
-                            <h4 class="filter-title">Difficulté</h4>
-                            <div class="filter-option">
-                                <input type="checkbox" class="filter-checkbox">
-                                <label class="filter-label">Facile</label>
-                                <span class="filter-count">10</span>
-                            </div>
-                            <div class="filter-option">
-                                <input type="checkbox" class="filter-checkbox" checked>
-                                <label class="filter-label">Moyen</label>
-                                <span class="filter-count">8</span>
-                            </div>
-                            <div class="filter-option">
-                                <input type="checkbox" class="filter-checkbox">
-                                <label class="filter-label">Difficile</label>
-                                <span class="filter-count">6</span>
-                            </div>
-                        </div>
-
-                        <!-- Time -->
-                        <div class="filter-section">
-                            <h4 class="filter-title">Temps</h4>
-                            <div class="filter-option">
-                                <input type="checkbox" class="filter-checkbox">
-                                <label class="filter-label">≤ 30 min</label>
-                                <span class="filter-count">9</span>
-                            </div>
-                            <div class="filter-option">
-                                <input type="checkbox" class="filter-checkbox" checked>
-                                <label class="filter-label">30-60 min</label>
-                                <span class="filter-count">8</span>
-                            </div>
-                            <div class="filter-option">
-                                <input type="checkbox" class="filter-checkbox">
-                                <label class="filter-label">≥ 60 min</label>
-                                <span class="filter-count">7</span>
-                            </div>
-                        </div>
-
                         <button class="action-btn action-btn-tertiary" style="width: 100%; justify-content: center;">
                             <i class="fas fa-times"></i>
                             Réinitialiser
                         </button>
                     </div>
                 </div>
-
-                <!-- Recipes Area -->
-                <div>
-                    <!-- Stats & Actions -->
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 20px;">
-                        <div>
-                            <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 8px;">Toutes mes recettes</h3>
-                            <p style="color: #999; font-size: 14px;">24 recettes • 8 favorites • 12 préparées récemment</p>
-                        </div>
-
-                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                            <button class="action-btn action-btn-primary">
-                                <i class="fas fa-sort-amount-down"></i>
-                                Trier
-                            </button>
-                            <button class="action-btn action-btn-secondary">
-                                <i class="fas fa-print"></i>
-                                Imprimer
-                            </button>
-                            <button class="action-btn action-btn-tertiary">
-                                <i class="fas fa-share-alt"></i>
-                                Partager
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Category Pills -->
-                    <div class="category-pills">
-                        <button class="category-pill active">Toutes</button>
-                        <button class="category-pill">Italienne</button>
-                        <button class="category-pill">Française</button>
-                        <button class="category-pill">Asiatique</button>
-                        <button class="category-pill">Végétarienne</button>
-                        <button class="category-pill">Rapide</button>
-                        <button class="category-pill">Santé</button>
-                    </div>
-
                     <!-- Recipe Grid -->
                     <div class="recipe-grid">
                         <!-- Recipe Card 1 -->
+                        @forelse($recipes as $recipe)
                         <div class="recipe-card">
                             <div class="recipe-image-container">
-                                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Ratatouille Provençale" class="recipe-image">
+                                <img src="{{ $recipe->image ?? 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }}"
+                                    alt="{{ $recipe->title }}"
+                                    class="recipe-image">
                                 <button class="favorite-btn">
                                     <i class="fas fa-heart" style="color: #EF4444;"></i>
                                 </button>
-                                <span class="difficulty-badge difficulty-medium">Moyen</span>
                             </div>
                             <div class="recipe-content">
                                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                                    <h4 class="recipe-title">Ratatouille Provençale</h4>
-                                    <span class="recipe-time">45 min</span>
+                                    <h4 class="recipe-title">{{ $recipe->title }}</h4>
                                 </div>
-                                <p class="recipe-description">Un classique de la cuisine méditerranéenne avec des légumes de saison mijotés à l'huile d'olive.</p>
-                                <div class="recipe-meta">
-                                    <div class="recipe-servings">
-                                        <i class="fas fa-utensils"></i>
-                                        <span>4 personnes</span>
-                                    </div>
-                                    <div class="recipe-tags">
-                                        <span class="recipe-tag tag-vegetarian">Végétarien</span>
-                                        <span class="recipe-tag tag-cuisine">Français</span>
-                                    </div>
-                                </div>
+                                <p class="recipe-description">{{ $recipe->description }}</p>
                                 <div class="recipe-actions">
                                     <button class="recipe-action-btn primary">
                                         <i class="fas fa-eye"></i> Voir
@@ -979,201 +909,30 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Recipe Card 2 -->
-                        <div class="recipe-card">
-                            <div class="recipe-image-container">
-                                <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bœuf Bourguignon" class="recipe-image">
-                                <button class="favorite-btn">
-                                    <i class="far fa-heart" style="color: #999;"></i>
-                                </button>
-                                <span class="difficulty-badge difficulty-hard">Difficile</span>
-                            </div>
-                            <div class="recipe-content">
-                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                                    <h4 class="recipe-title">Bœuf Bourguignon</h4>
-                                    <span class="recipe-time">2h 30</span>
-                                </div>
-                                <p class="recipe-description">Plat traditionnel français au vin rouge, carottes, oignons et lardons, mijoté lentement.</p>
-                                <div class="recipe-meta">
-                                    <div class="recipe-servings">
-                                        <i class="fas fa-utensils"></i>
-                                        <span>6 personnes</span>
-                                    </div>
-                                    <div class="recipe-tags">
-                                        <span class="recipe-tag tag-meat">Viande</span>
-                                        <span class="recipe-tag tag-cuisine">Français</span>
-                                    </div>
-                                </div>
-                                <div class="recipe-actions">
-                                    <button class="recipe-action-btn primary">
-                                        <i class="fas fa-eye"></i> Voir
-                                    </button>
-                                    <button class="recipe-action-btn">
-                                        <i class="fas fa-edit"></i> Éditer
-                                    </button>
-                                    <button class="recipe-action-btn">
-                                        <i class="fas fa-trash-alt"></i> Supprimer
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Recipe Card 3 -->
-                        <div class="recipe-card">
-                            <div class="recipe-image-container">
-                                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pizza Margherita" class="recipe-image">
-                                <button class="favorite-btn">
-                                    <i class="fas fa-heart" style="color: #EF4444;"></i>
-                                </button>
-                                <span class="difficulty-badge difficulty-easy">Facile</span>
-                            </div>
-                            <div class="recipe-content">
-                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                                    <h4 class="recipe-title">Pizza Margherita</h4>
-                                    <span class="recipe-time">30 min</span>
-                                </div>
-                                <p class="recipe-description">Pizza traditionnelle italienne avec sauce tomate, mozzarella fraîche et basilic.</p>
-                                <div class="recipe-meta">
-                                    <div class="recipe-servings">
-                                        <i class="fas fa-utensils"></i>
-                                        <span>2-3 personnes</span>
-                                    </div>
-                                    <div class="recipe-tags">
-                                        <span class="recipe-tag tag-vegetarian">Végétarien</span>
-                                        <span class="recipe-tag tag-quick">Italien</span>
-                                    </div>
-                                </div>
-                                <div class="recipe-actions">
-                                    <button class="recipe-action-btn primary">
-                                        <i class="fas fa-eye"></i> Voir
-                                    </button>
-                                    <button class="recipe-action-btn">
-                                        <i class="fas fa-edit"></i> Éditer
-                                    </button>
-                                    <button class="recipe-action-btn">
-                                        <i class="fas fa-trash-alt"></i> Supprimer
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Recipe Card 4 -->
-                        <div class="recipe-card">
-                            <div class="recipe-image-container">
-                                <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Salade César" class="recipe-image">
-                                <button class="favorite-btn">
-                                    <i class="far fa-heart" style="color: #999;"></i>
-                                </button>
-                                <span class="difficulty-badge difficulty-easy">Facile</span>
-                            </div>
-                            <div class="recipe-content">
-                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                                    <h4 class="recipe-title">Salade César</h4>
-                                    <span class="recipe-time">20 min</span>
-                                </div>
-                                <p class="recipe-description">Salade fraîche avec poulet grillé, croûtons, parmesan et sauce césar maison.</p>
-                                <div class="recipe-meta">
-                                    <div class="recipe-servings">
-                                        <i class="fas fa-utensils"></i>
-                                        <span>2 personnes</span>
-                                    </div>
-                                    <div class="recipe-tags">
-                                        <span class="recipe-tag tag-meat">Poulet</span>
-                                        <span class="recipe-tag tag-quick">Rapide</span>
-                                    </div>
-                                </div>
-                                <div class="recipe-actions">
-                                    <button class="recipe-action-btn primary">
-                                        <i class="fas fa-eye"></i> Voir
-                                    </button>
-                                    <button class="recipe-action-btn">
-                                        <i class="fas fa-edit"></i> Éditer
-                                    </button>
-                                    <button class="recipe-action-btn">
-                                        <i class="fas fa-trash-alt"></i> Supprimer
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Recipe Card 5 -->
-                        <div class="recipe-card">
-                            <div class="recipe-image-container">
-                                <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pancakes aux Myrtilles" class="recipe-image">
-                                <button class="favorite-btn">
-                                    <i class="fas fa-heart" style="color: #EF4444;"></i>
-                                </button>
-                                <span class="difficulty-badge difficulty-medium">Moyen</span>
-                            </div>
-                            <div class="recipe-content">
-                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                                    <h4 class="recipe-title">Pancakes aux Myrtilles</h4>
-                                    <span class="recipe-time">25 min</span>
-                                </div>
-                                <p class="recipe-description">Pancakes moelleux garnis de myrtilles fraîches, parfaits pour un petit-déjeuner gourmand.</p>
-                                <div class="recipe-meta">
-                                    <div class="recipe-servings">
-                                        <i class="fas fa-utensils"></i>
-                                        <span>4 personnes</span>
-                                    </div>
-                                    <div class="recipe-tags">
-                                        <span class="recipe-tag tag-vegetarian">Végétarien</span>
-                                        <span class="recipe-tag tag-quick">Rapide</span>
-                                    </div>
-                                </div>
-                                <div class="recipe-actions">
-                                    <button class="recipe-action-btn primary">
-                                        <i class="fas fa-eye"></i> Voir
-                                    </button>
-                                    <button class="recipe-action-btn">
-                                        <i class="fas fa-edit"></i> Éditer
-                                    </button>
-                                    <button class="recipe-action-btn">
-                                        <i class="fas fa-trash-alt"></i> Supprimer
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Add Recipe Card -->
+                        <a href="{{ route("addRecipe") }}" class="fab">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                        @empty
                         <div class="add-recipe-card">
                             <div class="add-recipe-icon">
                                 <i class="fas fa-plus"></i>
                             </div>
                             <h4 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--charcoal);">Ajouter une recette</h4>
                             <p style="color: #666; text-align: center; margin-bottom: 24px; line-height: 1.6;">Créez votre propre recette et partagez votre créativité culinaire.</p>
-                            <button class="action-btn action-btn-primary">
+                            <a href="{{ route("addRecipe") }}" class="action-btn action-btn-primary">
                                 <i class="fas fa-plus"></i>
                                 Créer une recette
-                            </button>
+                            </a>
                         </div>
-                    </div>
+                        @endforelse
 
-                    <!-- Pagination -->
-                    <div class="pagination">
-                        <button class="pagination-btn disabled">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="pagination-btn active">1</button>
-                        <button class="pagination-btn">2</button>
-                        <button class="pagination-btn">3</button>
-                        <button class="pagination-btn">4</button>
-                        <span style="color: #999; padding: 0 8px;">...</span>
-                        <button class="pagination-btn">8</button>
-                        <button class="pagination-btn">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Floating Action Button -->
-    <button class="fab">
-        <i class="fas fa-plus"></i>
-    </button>
+
 
     <script>
         // Mobile menu toggle
@@ -1256,4 +1015,5 @@
         });
     </script>
 </body>
+
 </html>
