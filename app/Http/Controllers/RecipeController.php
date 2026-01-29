@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Validator;
 class RecipeController extends Controller
 {
     public function index(){
-        $recipes = Recipe::all();
-        return view("recipe.allRecipes", ["recipes" => $recipes]);
+        $recipes = Recipe::all()->where('is_deleted', false);
+        $categories = Category::all();
+        return view("recipe.allRecipes", ["recipes" => $recipes, "categories" => $categories]);
     }
     public function showAddRecipeForm()
     {
@@ -36,7 +37,7 @@ class RecipeController extends Controller
             return redirect()->route('login');
         }
 
-        $recipes  = Recipe::where('user_id', Auth::id())->get();
+        $recipes  = Recipe::where('user_id', Auth::id())->where('is_deleted', false)->get();
 
         return view('recipe.myRecipes', ['recipes' => $recipes]);
     }
@@ -119,5 +120,18 @@ class RecipeController extends Controller
         return redirect()
             ->route('myRecipe', $recipe->id)
             ->with('success', 'Recipe updated successfully!');
+    }
+
+    public function delete(Request $request){
+        $id = $request->id;
+        $recipe = Recipe::find($id);
+        
+        if ($recipe) {
+            $recipe->update([
+                "is_deleted" => true
+            ]);
+        }
+        
+        return redirect()->route('myRecipe');
     }
 }
