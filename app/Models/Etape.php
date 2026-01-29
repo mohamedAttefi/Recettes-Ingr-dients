@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Etape extends Model
 {
-    protected $table = "etape";
-    protected $fillable = ["recipe_id", "etape_order", "instructions"];
+    protected $table = "etapes";
+    protected $primaryKey = 'id_etape';
+    public $incrementing = true;
+    protected $keyType = 'int';
+    protected $fillable = ["id_recette", "numero_etape", "description"];
 
     public function recipe()
     {
