@@ -658,65 +658,7 @@
 </head>
 
 <body>
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-logo">
-            <div style="display: flex; align-items: center;">
-                <span style="font-size: 32px; margin-right: 12px;">🍳</span>
-                <h1 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: white;">Recettes & Ingrédients</h1>
-            </div>
-        </div>
-
-        <nav style="padding: 24px 0; flex: 1;">
-            <a href="dashboard.html" class="sidebar-item">
-                <i class="fas fa-home" style="width: 20px;"></i>
-                <span style="margin-left: 12px;">Tableau de Bord</span>
-            </a>
-
-            <a href="mes-recettes.html" class="sidebar-item">
-                <i class="fas fa-book" style="width: 20px;"></i>
-                <span style="margin-left: 12px;">Mes Recettes</span>
-                <span style="margin-left: auto; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; background: rgba(232, 97, 60, 0.2); color: var(--burnt-orange);">24</span>
-            </a>
-
-            <a href="ingredients.html" class="sidebar-item">
-                <i class="fas fa-carrot" style="width: 20px;"></i>
-                <span style="margin-left: 12px;">Mes Ingrédients</span>
-            </a>
-
-            <a href="favoris.html" class="sidebar-item">
-                <i class="fas fa-heart" style="width: 20px;"></i>
-                <span style="margin-left: 12px;">Favoris</span>
-                <span style="margin-left: auto; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; background: rgba(236, 72, 153, 0.2); color: #EC4899;">8</span>
-            </a>
-
-            <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 24px 12px; padding-top: 24px;">
-                <a href="parametres.html" class="sidebar-item">
-                    <i class="fas fa-cog" style="width: 20px;"></i>
-                    <span style="margin-left: 12px;">Paramètres</span>
-                </a>
-
-                <a href="profil.html" class="sidebar-item">
-                    <i class="fas fa-user" style="width: 20px;"></i>
-                    <span style="margin-left: 12px;">Mon Profil</span>
-                </a>
-            </div>
-        </nav>
-
-        <div class="user-profile">
-            <div style="display: flex; align-items: center;">
-                <div style="width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--terracotta) 100%); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 18px;">
-                    C
-                </div>
-                <div style="margin-left: 12px;">
-                    <p style="font-weight: 600; color: white; font-size: 15px;">Chef Martin</p>
-                    <p style="font-size: 13px; color: rgba(255, 255, 255, 0.5);">Cuisinier passionné</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Content -->
+    @include('header')
     <div class="main-content">
         <!-- Header -->
         <header class="header">
