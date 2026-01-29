@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mes Recettes - Recettes et Ingrédients</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Ajouter SweetAlert CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -728,7 +729,6 @@
         .mobile-overlay.active {
             display: block;
         }
-        
     </style>
 </head>
 
@@ -813,58 +813,63 @@
                         </button>
                     </div>
                 </div>
-                    <!-- Recipe Grid -->
-                    <div class="recipe-grid">
-                        <!-- Recipe Card 1 -->
-                        @forelse($recipes as $recipe)
-                        <div class="recipe-card">
-                            <div class="recipe-image-container">
-                                <img src="{{ $recipe->image ?? 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }}"
-                                    alt="{{ $recipe->title }}"
-                                    class="recipe-image">
-                                <button class="favorite-btn">
-                                    <i class="fas fa-heart" style="color: #EF4444;"></i>
-                                </button>
+                <!-- Recipe Grid -->
+                <div class="recipe-grid">
+                    <!-- Recipe Card 1 -->
+                    @forelse($recipes as $recipe)
+                    <div class="recipe-card">
+                        <div class="recipe-image-container">
+                            <img src="{{ $recipe->image ?? 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }}"
+                                alt="{{ $recipe->title }}"
+                                class="recipe-image">
+                            <button class="favorite-btn">
+                                <i class="fas fa-heart" style="color: #EF4444;"></i>
+                            </button>
+                        </div>
+                        <div class="recipe-content">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                                <h4 class="recipe-title">{{ $recipe->title }}</h4>
                             </div>
-                            <div class="recipe-content">
-                                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
-                                    <h4 class="recipe-title">{{ $recipe->title }}</h4>
-                                </div>
-                                <p class="recipe-description">{{ $recipe->description }}</p>
-                                <div class="recipe-actions">
-                                    <a href="{{ route("showRecipe") }}?id={{ $recipe->id }}" class="recipe-action-btn primary">
-                                        <i class="fas fa-eye"></i> Voir
-                                    </a>
-                                    <a href="{{ route("showEditRecipeForm") }}?id={{ $recipe->id }}" class="recipe-action-btn">
-                                        <i class="fas fa-edit"></i> Éditer
-                                    </a>
-                                    <button class="recipe-action-btn">
-                                        <i class="fas fa-trash-alt"></i> Supprimer
+                            <p class="recipe-description">{{ $recipe->description }}</p>
+                            <div class="recipe-actions">
+                                <a href="{{ route("showRecipe") }}?id={{ $recipe->id }}" class="recipe-action-btn primary">
+                                    <i class="fas fa-eye"></i> Voir
+                                </a>
+                                <a href="{{ route("showEditRecipeForm") }}?id={{ $recipe->id }}" class="recipe-action-btn">
+                                    <i class="fas fa-edit"></i> Éditer
+                                </a>
+                                <form id="form-delete" method="post" action="{{ route("delete") }}">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $recipe->id }}">
+                                    <button data-recipe-title="{{ $recipe->title }}"  class="recipe-action-btn delete-btn">
+                                        <i class="fas fa-trash-alt"></i>
+                                        Supprimer
                                     </button>
-                                </div>
+                                </form>
                             </div>
                         </div>
-                        <a href="{{ route("addRecipe") }}" class="fab">
-                            <i class="fas fa-plus"></i>
-                        </a>
-                        @empty
-                        <div class="add-recipe-card">
-                            <div class="add-recipe-icon">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                            <h4 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--charcoal);">Ajouter une recette</h4>
-                            <p style="color: #666; text-align: center; margin-bottom: 24px; line-height: 1.6;">Créez votre propre recette et partagez votre créativité culinaire.</p>
-                            <a href="{{ route("addRecipe") }}" class="action-btn action-btn-primary">
-                                <i class="fas fa-plus"></i>
-                                Créer une recette
-                            </a>
-                        </div>
-                        @endforelse
-
                     </div>
+                    <a href="{{ route("addRecipe") }}" class="fab">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                    @empty
+                    <div class="add-recipe-card">
+                        <div class="add-recipe-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <h4 style="font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--charcoal);">Ajouter une recette</h4>
+                        <p style="color: #666; text-align: center; margin-bottom: 24px; line-height: 1.6;">Créez votre propre recette et partagez votre créativité culinaire.</p>
+                        <a href="{{ route("addRecipe") }}" class="action-btn action-btn-primary">
+                            <i class="fas fa-plus"></i>
+                            Créer une recette
+                        </a>
+                    </div>
+                    @endforelse
+
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
 
@@ -874,6 +879,50 @@
         const menuToggle = document.getElementById('menuToggle');
         const sidebar = document.getElementById('sidebar');
         const mobileOverlay = document.getElementById('mobileOverlay');
+
+
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const recipeTitle = this.getAttribute('data-recipe-title');
+
+                Swal.fire({
+                    title: 'Êtes-vous sûr ?',
+                    html: `
+                    <div class="text-center">
+                        <div class="mb-4">
+                            <i class="fas fa-exclamation-triangle text-5xl text-yellow-500"></i>
+                        </div>
+                        <p class="text-lg font-semibold mb-2">Supprimer la recette</p>
+                        <p class="text-gray-600">"<strong>${recipeTitle}</strong>"</p>
+                        <p class="text-sm text-gray-500 mt-2">Cette action est irréversible !</p>
+                    </div>
+                `,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#E8613C',
+                    cancelButtonColor: '#6B7280',
+                    confirmButtonText: 'Oui, supprimer !',
+                    cancelButtonText: 'Annuler',
+                    reverseButtons: true,
+                    backdrop: `
+                    rgba(0, 0, 0, 0.7)
+                `,
+                    customClass: {
+                        popup: 'rounded-2xl shadow-2xl',
+                        confirmButton: 'px-6 py-3 rounded-lg font-semibold',
+                        cancelButton: 'px-6 py-3 rounded-lg font-semibold'
+                    },
+                    buttonsStyling: false,
+                    showLoaderOnConfirm: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        document.getElementById('form-delete').submit()
+                    }
+                });
+            });
+        });
 
         // Show menu toggle on mobile
         if (window.innerWidth <= 1024) {
