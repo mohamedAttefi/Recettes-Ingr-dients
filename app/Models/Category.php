@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    protected $table = "category";
+    protected $primaryKey = 'id_category';
+    protected $table = "categories";
     protected $fillable  = ["name", "icon", "description"];
 
     public function recipe(){
