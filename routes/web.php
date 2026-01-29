@@ -13,6 +13,7 @@ Route::get('/dashboard', [UserController::class, "index"])->name('dashboard');
 Route::get("/recipe/myRecipe", [RecipeController::class, "showMyRecipe"])->name("myRecipe");
 Route::get("/recipe/addRecipe", [RecipeController::class, "showAddRecipeForm"])->name("addRecipe.form");
 Route::get("/recipe/showRecipe", [RecipeController::class, "showRecipe"])->name("showRecipe");
+Route::post("/recipe/myRecipe", [RecipeController::class, "delete"])->name("delete");
 Route::get("/recipe/editRecipe", [RecipeController::class, "showEditRecipe"])->name("showEditRecipeForm");
 Route::post("/recipe/editRecipe", [RecipeController::class, "update"])->name("update");
 Route::post("/recipe/addRecipe", [RecipeController::class, "store"])->name("addRecipe");
