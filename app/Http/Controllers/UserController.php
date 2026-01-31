@@ -9,6 +9,9 @@ class UserController extends Controller
 {
     public function index()
     {
+        if(!Auth::check()){
+            return redirect()->route("login");
+        }
         $recipes = Recipe::where("user_id", Auth::user()->id)->get();
         return view("dashboard", ["recipes" => $recipes]);
     }

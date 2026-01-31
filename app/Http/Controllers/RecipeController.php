@@ -15,9 +15,16 @@ use Illuminate\Support\Facades\Validator;
 
 class RecipeController extends Controller
 {
-    public function index(){
-        $recipes = Recipe::all()->where('is_deleted', false);
+    public function index(Request $request)
+    {
+        $recipes = Recipe::all();
         $categories = Category::all();
+        if ($request->filled('q')) {
+            $recipes->where('title', 'like', '%' . $request->q . '%');
+        }
+        if ($request->filled('category')) {
+            $recipes->where('category_id', $request->category);
+        }
         return view("recipe.allRecipes", ["recipes" => $recipes, "categories" => $categories]);
     }
     public function showAddRecipeForm()
@@ -36,14 +43,14 @@ class RecipeController extends Controller
         if (!Auth::check()) {
             return redirect()->route('login');
         }
-
+        $categories = Category::all();
         $recipes  = Recipe::where('user_id', Auth::id())->where('is_deleted', false)->get();
 
-        return view('recipe.myRecipes', ['recipes' => $recipes]);
+        return view('recipe.myRecipes', ['recipes' => $recipes, "categories" => $categories]);
     }
     public function store(Request $request)
     {
-        $imagePath = $request->image ?? null;
+        $imagePath = $request->image_url ?? null;
 
         $recipe = Recipe::create([
             'user_id' => Auth::id(),
@@ -101,9 +108,9 @@ class RecipeController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'difficulty' => 'required|in:easy,medium,hard',
-            'prep_time' => 'required|integer|min:0',
-            'cook_time' => 'required|integer|min:0',
-            'servings' => 'required|integer|min:1',
+            'prep_time' => 'nullable|integer|min:0',
+            'cook_time' => 'nullable|integer|min:0',
+            'servings' => 'nullable|integer|min:1',
         ]);
 
         $recipe = Recipe::find($id);
@@ -111,10 +118,14 @@ class RecipeController extends Controller
         $recipe->update([
             'title' => $request->title,
             'description' => $request->description,
+            'category_id' => $request->category,
+            'id_cuisine' => $request->cuisine,
             'difficulty' => $request->difficulty,
             'temp_prepa' => $request->prep_time,
-            'temp_cuission' => $request->cook_time,
+            'temp_cuission' => $request->cook_time ?? null,
             'personnes' => $request->servings,
+            'image' => $request->image_url,
+            'astuces' => $request->chef_notes ?? null,
         ]);
 
         return redirect()
@@ -122,16 +133,17 @@ class RecipeController extends Controller
             ->with('success', 'Recipe updated successfully!');
     }
 
-    public function delete(Request $request){
+    public function delete(Request $request)
+    {
         $id = $request->id;
         $recipe = Recipe::find($id);
-        
+
         if ($recipe) {
             $recipe->update([
                 "is_deleted" => true
             ]);
         }
-        
+
         return redirect()->route('myRecipe');
     }
 }

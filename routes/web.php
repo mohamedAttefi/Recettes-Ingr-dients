@@ -15,7 +15,7 @@ Route::get("/recipe/addRecipe", [RecipeController::class, "showAddRecipeForm"])-
 Route::get("/recipe/showRecipe", [RecipeController::class, "showRecipe"])->name("showRecipe");
 Route::post("/recipe/myRecipe", [RecipeController::class, "delete"])->name("delete");
 Route::get("/recipe/editRecipe", [RecipeController::class, "showEditRecipe"])->name("showEditRecipeForm");
-Route::post("/recipe/editRecipe", [RecipeController::class, "update"])->name("update");
+Route::put("/recipe/editRecipe", [RecipeController::class, "update"])->name("update");
 Route::post("/recipe/addRecipe", [RecipeController::class, "store"])->name("addRecipe");
 Route::get("/recipe/All", [RecipeController::class, "index"])->name("allRecipes");
 

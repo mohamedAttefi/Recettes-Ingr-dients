@@ -4,226 +4,273 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modifier une Recette - Recettes et Ingrédients</title>
+    <title>Modifier une Recette - Simple & Épuré</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --burnt-orange: #E8613C;
-            --terracotta: #D84A2E;
-            --cream: #FFF8F0;
-            --sage: #8B9A7E;
-            --charcoal: #2C2C2C;
-            --gold: #D4AF37;
-            --warm-white: #FDFCFA;
-            --soft-gray: #F5F3F0;
-            --success-green: #10B981;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--soft-gray);
-            color: var(--charcoal);
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fa;
+            color: #212529;
         }
 
-        /* Sidebar */
-        .sidebar {
-            background: linear-gradient(180deg, #2C2C2C 0%, #1a1a1a 100%);
-            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
-            position: fixed;
-            left: 0;
-            top: 0;
-            height: 100vh;
-            width: 280px;
-            z-index: 50;
-            overflow-y: auto;
-        }
-
-        .sidebar-logo {
-            padding: 32px 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar-item {
-            position: relative;
-            display: flex;
-            align-items: center;
-            padding: 14px 24px;
-            margin: 4px 12px;
-            border-radius: 12px;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            font-weight: 500;
-            font-size: 15px;
-        }
-
-        .sidebar-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 3px;
-            height: 0;
-            background: var(--burnt-orange);
-            border-radius: 0 3px 3px 0;
-            transition: height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .sidebar-item:hover {
-            color: white;
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateX(4px);
-        }
-
-        .sidebar-item.active {
-            color: var(--burnt-orange);
-            background: rgba(232, 97, 60, 0.1);
-        }
-
-        .sidebar-item.active::before {
-            height: 60%;
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-left: 280px;
-            min-height: 100vh;
-        }
-
-        /* Header */
-        .header {
+        /* Navbar */
+        .navbar {
             background: white;
-            border-bottom: 1px solid #E8E5E1;
-            padding: 24px 40px;
+            border-bottom: 1px solid #e9ecef;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: sticky;
             top: 0;
-            z-index: 40;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            z-index: 100;
         }
 
-        /* Form Container */
-        .form-container {
-            max-width: 900px;
+        .navbar-brand {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .navbar-nav {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #495057;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-link:hover {
+            color: #2563eb;
+        }
+
+        .nav-link.active {
+            color: #2563eb;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 800px;
             margin: 0 auto;
-            padding: 40px;
+            padding: 40px 24px;
         }
 
-        .form-card {
-            background: white;
-            border-radius: 24px;
-            padding: 48px;
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        /* Page Header */
+        .page-header {
             margin-bottom: 32px;
-            animation: fadeInUp 0.6s ease-out;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 8px;
+        }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .page-subtitle {
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        /* Card */
+        .card {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212529;
+            margin-bottom: 24px;
         }
 
         /* Form Elements */
         .form-group {
-            margin-bottom: 28px;
+            margin-bottom: 20px;
         }
 
         .form-label {
             display: block;
-            font-weight: 600;
-            font-size: 15px;
-            color: var(--charcoal);
-            margin-bottom: 12px;
+            font-weight: 500;
+            font-size: 14px;
+            color: #212529;
+            margin-bottom: 8px;
         }
 
-        .form-label .required {
-            color: var(--burnt-orange);
-            margin-left: 4px;
+        .required {
+            color: #dc3545;
         }
 
         .form-input,
         .form-textarea,
         .form-select {
             width: 100%;
-            padding: 14px 18px;
-            border: 2px solid #E8E5E1;
-            border-radius: 12px;
-            font-size: 15px;
-            font-family: 'DM Sans', sans-serif;
-            color: var(--charcoal);
-            background: var(--warm-white);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 10px 14px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            color: #212529;
+            background: white;
+            transition: border-color 0.2s;
         }
 
         .form-input:focus,
         .form-textarea:focus,
         .form-select:focus {
             outline: none;
-            border-color: var(--burnt-orange);
-            box-shadow: 0 0 0 4px rgba(232, 97, 60, 0.1);
-            background: white;
+            border-color: #2563eb;
         }
 
         .form-textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 100px;
         }
 
-        /* Image Upload */
-        .image-upload-area {
-            border: 2px dashed #D4AF37;
-            border-radius: 20px;
-            padding: 60px 24px;
-            text-align: center;
-            background: linear-gradient(135deg, #FFFBF5 0%, #FFF8F0 100%);
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative;
-            overflow: hidden;
+        .helper-text {
+            font-size: 12px;
+            color: #6c757d;
+            margin-top: 4px;
         }
 
-        .image-upload-area:hover {
-            border-color: var(--burnt-orange);
-            background: linear-gradient(135deg, #FFF8F0 0%, #FFE8DC 100%);
-            transform: translateY(-2px);
+        /* Grid Layout */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
         }
 
-        .image-upload-area.dragover {
-            border-color: var(--burnt-orange);
-            background: linear-gradient(135deg, #FFE8DC 0%, #FFD4C4 100%);
-            transform: scale(1.02);
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
         }
 
-        .upload-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--terracotta) 100%);
-            border-radius: 50%;
+        /* Dynamic Lists */
+        .list-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .list-number {
+            width: 32px;
+            height: 38px;
+            background: #f8f9fa;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            color: white;
-            font-size: 32px;
+            font-weight: 600;
+            color: #2563eb;
+            flex-shrink: 0;
         }
 
+        .list-inputs {
+            flex: 1;
+        }
+
+        .remove-btn {
+            width: 38px;
+            height: 38px;
+            background: #fff;
+            border: 1px solid #dc3545;
+            color: #dc3545;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .remove-btn:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 10px;
+            border: 1px dashed #ced4da;
+            background: transparent;
+            color: #6c757d;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+
+        .add-btn:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+            background: #f0f7ff;
+        }
+
+        /* Difficulty Selector */
+        .difficulty-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .difficulty-option {
+            padding: 16px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .difficulty-option:hover {
+            border-color: #2563eb;
+        }
+
+        .difficulty-option.selected {
+            border-color: #2563eb;
+            background: #f0f7ff;
+        }
+
+        .difficulty-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .difficulty-label {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Image Preview */
         .image-preview {
-            display: none;
             position: relative;
-            border-radius: 16px;
+            width: 100%;
+            border-radius: 6px;
             overflow: hidden;
-            max-height: 400px;
+            border: 1px solid #e9ecef;
         }
 
         .image-preview img {
@@ -232,394 +279,107 @@
             display: block;
         }
 
-        .image-preview-actions {
+        .image-remove {
             position: absolute;
-            top: 16px;
-            right: 16px;
-            display: flex;
-            gap: 8px;
-        }
-
-        /* Dynamic Lists */
-        .dynamic-list {
-            margin-top: 16px;
-        }
-
-        .list-item {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
-            align-items: flex-start;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .list-item-number {
-            width: 36px;
-            height: 36px;
-            background: var(--soft-gray);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: var(--burnt-orange);
-            flex-shrink: 0;
-            margin-top: 6px;
-        }
-
-        .list-item-inputs {
-            flex: 1;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 12px;
-        }
-
-        .remove-btn {
-            width: 36px;
-            height: 36px;
-            background: #FEE2E2;
-            color: #DC2626;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            flex-shrink: 0;
-            margin-top: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .remove-btn:hover {
-            background: #FCA5A5;
-            transform: scale(1.05);
-        }
-
-        .add-item-btn {
-            width: 100%;
-            padding: 14px;
-            border: 2px dashed #D1D1D1;
-            background: transparent;
-            color: #666;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 12px;
-        }
-
-        .add-item-btn:hover {
-            border-color: var(--burnt-orange);
-            color: var(--burnt-orange);
-            background: rgba(232, 97, 60, 0.05);
-        }
-
-        /* Tags Input */
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 12px;
-            border: 2px solid #E8E5E1;
-            border-radius: 12px;
-            background: var(--warm-white);
-            min-height: 52px;
-            transition: all 0.3s;
-        }
-
-        .tags-container:focus-within {
-            border-color: var(--burnt-orange);
-            box-shadow: 0 0 0 4px rgba(232, 97, 60, 0.1);
+            top: 12px;
+            right: 12px;
             background: white;
-        }
-
-        .tag {
-            padding: 8px 16px;
-            background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--terracotta) 100%);
-            color: white;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            animation: tagPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes tagPop {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .tag-remove {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            padding: 0;
-            width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: #dc3545;
+            border: 1px solid #dc3545;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            transition: background 0.2s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
         }
 
-        .tag-remove:hover {
-            background: rgba(255, 255, 255, 0.2);
+        .image-remove:hover {
+            background: #dc3545;
+            color: white;
         }
 
-        .tag-input {
-            border: none;
-            outline: none;
-            background: transparent;
-            flex: 1;
-            min-width: 120px;
-            font-size: 15px;
-            font-family: 'DM Sans', sans-serif;
-            padding: 6px;
-        }
-
-        /* Difficulty Selector */
-        .difficulty-selector {
+        /* Buttons */
+        .btn-group {
             display: flex;
             gap: 12px;
-        }
-
-        .difficulty-option {
-            flex: 1;
-            padding: 20px 16px;
-            border: 2px solid #E8E5E1;
-            border-radius: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .difficulty-option:hover {
-            border-color: var(--burnt-orange);
-            transform: translateY(-2px);
-        }
-
-        .difficulty-option.selected {
-            border-color: var(--burnt-orange);
-            background: rgba(232, 97, 60, 0.05);
-        }
-
-        .difficulty-icon {
-            font-size: 28px;
-        }
-
-        .difficulty-label {
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .difficulty-desc {
-            font-size: 12px;
-            color: #666;
-            margin-top: 4px;
-        }
-
-        /* Time Inputs */
-        .time-inputs {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
-        .time-input {
-            position: relative;
-        }
-
-        .time-input input {
-            padding-right: 50px;
-        }
-
-        .time-unit {
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-            font-size: 14px;
-        }
-
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            gap: 16px;
             justify-content: flex-end;
-            padding-top: 32px;
-            border-top: 1px solid #E8E5E1;
-            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e9ecef;
+            margin-top: 24px;
         }
 
         .btn {
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-size: 15px;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.2s;
             border: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            text-decoration: none;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--terracotta) 100%);
+            background: #2563eb;
             color: white;
-            box-shadow: 0 4px 12px rgba(232, 97, 60, 0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(232, 97, 60, 0.4);
+            background: #1d4ed8;
         }
 
         .btn-secondary {
             background: white;
-            color: #666;
-            border: 2px solid #E8E5E1;
+            color: #6c757d;
+            border: 1px solid #ced4da;
         }
 
         .btn-secondary:hover {
-            border-color: #999;
-            background: #f8f8f8;
+            background: #f8f9fa;
         }
 
-        /* Helper Text */
-        .helper-text {
-            font-size: 13px;
-            color: #999;
-            margin-top: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Success Message */
-        .success-message {
+        /* Success Alert */
+        .alert-success {
             display: none;
-            background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 12px;
+            background: #d1fae5;
+            border: 1px solid #6ee7b7;
+            color: #065f46;
+            padding: 16px;
+            border-radius: 6px;
             margin-bottom: 24px;
-            animation: slideDown 0.5s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            z-index: 1000;
-            transform: translateX(150%);
-            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-        }
-
-        .toast.show {
-            transform: translateX(0);
-        }
-
-        .toast-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--success-green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-            .sidebar {
-                transform: translateX(-100%);
-                transition: transform 0.3s;
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-        }
-
         @media (max-width: 768px) {
-            .form-container {
-                padding: 24px 20px;
+            .navbar {
+                padding: 12px 16px;
             }
 
-            .form-card {
-                padding: 28px 24px;
+            .navbar-nav {
+                display: none;
             }
 
-            .header {
-                padding: 20px;
+            .container {
+                padding: 24px 16px;
             }
 
-            .action-buttons {
+            .card {
+                padding: 24px 16px;
+            }
+
+            .grid-2,
+            .grid-3,
+            .difficulty-options {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
                 flex-direction: column-reverse;
             }
 
@@ -627,483 +387,346 @@
                 width: 100%;
                 justify-content: center;
             }
-
-            .difficulty-selector {
-                flex-direction: column;
-            }
-
-            .time-inputs {
-                grid-template-columns: 1fr;
-            }
-
-            .list-item-inputs {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #F5F3F0;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--burnt-orange), var(--terracotta));
-            border-radius: 5px;
         }
     </style>
 </head>
 
 <body>
     @include('header')
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Header -->
-        <header class="header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; align-items: center; gap: 16px;">
-                    <button id="menuToggle" style="display: none; background: none; border: none; font-size: 24px; color: var(--charcoal); cursor: pointer; padding: 8px;">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                    <div>
-                        <h2 style="font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--charcoal); margin-bottom: 4px;">Modifier une Recette</h2>
-                        <p style="color: #999; font-size: 14px;">Partagez votre créativité culinaire avec la communauté</p>
-                    </div>
-                </div>
 
-                <div style="display: flex; gap: 12px;">
-                    <button id="saveDraftBtn" class="btn btn-secondary">
-                        <i class="fas fa-save"></i>
-                        Sauvegarder
-                    </button>
-                    <a href="mes-recettes.html" style="text-decoration: none;">
-                        <button class="btn btn-secondary">
-                            <i class="fas fa-times"></i>
-                            Annuler
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </header>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Modifier une Recette</h1>
+            <p class="page-subtitle">Mettez à jour votre recette</p>
+        </div>
 
-        <!-- Success Message -->
-        <div class="success-message" id="successMessage">
+        <!-- Success Alert -->
+        <div class="alert-success" id="successAlert">
             <div style="display: flex; align-items: center; gap: 12px;">
-                <i class="fas fa-check-circle" style="font-size: 24px;"></i>
-                <div>
-                    <p style="font-weight: 600; font-size: 16px;">Recette sauvegardée en brouillon !</p>
-                    <p style="font-size: 14px; opacity: 0.9;">Vous pouvez continuer à modifier ou publier plus tard.</p>
-                </div>
+                <i class="fas fa-check-circle" style="font-size: 20px;"></i>
+                <span style="font-weight: 600;">Recette mise à jour avec succès !</span>
             </div>
         </div>
 
-        <!-- Form Container -->
-        <div class="form-container">
-            <form id="recipeForm" method="POST" action="{{ route("update")}}">
-                @csrf
-                <input type="hidden" name="id" value="{{ $recipe->id }}">
-                <div class="form-card">
-                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 32px;">
-                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--terracotta) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
-                            <i class="fas fa-info-circle"></i>
-                        </div>
-                        <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--charcoal);">Informations de Base</h2>
-                    </div>
+        <form id="recipeForm" action="{{ route('update') }}" method="post">
+            @csrf
+            @method('PUT')
+            <input type="hidden" name="id" value="{{ $recipe->id }}">
 
-                    <div class="form-group">
-                        <label class="form-label">
-                            Nom de la recette <span class="required">*</span>
-                        </label>
-                        <input type="text" name="title" value="{{ $recipe->title }}" class="form-input" placeholder="Ex: Ratatouille Provençale" required>
-                        @error('title')
-                        <span class="text-red-500">{{ $message }}</span>
-                        @enderror
-                        <div class="helper-text">
-                            <i class="fas fa-lightbulb"></i>
-                            Donnez un nom descriptif et appétissant à votre recette
-                        </div>
-                    </div>
+            <!-- Informations de Base -->
+            <div class="card">
+                <h2 class="card-title">Informations de Base</h2>
 
-                    <div class="form-group">
-                        <label class="form-label">
-                            Description
-                        </label>
-                        <textarea name="description" value="{{ $recipe->description }}" class="form-textarea" placeholder="Décrivez brièvement votre recette, son origine, ou ce qui la rend spéciale..." rows="4"></textarea>
-                        @error('description')
-                        <span class="text-red-500">{{ $message }}</span>
-                        @enderror
-                        <div class="helper-text">
-                            <i class="fas fa-lightbulb"></i>
-                            Une bonne description attire les cuisiniers !
-                        </div>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-                        <div class="form-group">
-                            <label class="form-label">
-                                Catégorie <span class="required">*</span>
-                            </label>
-                            <select name="category" value="{{ $recipe->category_id }}" class="form-select" required>
-                                <option value="">Sélectionnez une catégorie</option>
-                                @foreach($categories as $categorie)
-                                <option value="{{ $categorie->id_category }}">{{ $categorie->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">
-                                Type de cuisine
-                            </label>
-                            <select name="cuisine" value="{{ $recipe->id_cuisine }}" class="form-select">
-                                <option value="">Origine de la recette</option>
-                                @foreach($cuisines as $cuisine)
-                                <option value="{{ $cuisine->id }}">{{ $cuisine->name }}</option>
-                                @endforeach
-
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">
-                            Difficulté <span class="required">*</span>
-                        </label>
-                        <input type="hidden" value="{{ $recipe->difficulty }}" name="difficulty" id="difficultyInput" required>
-                        <div class="difficulty-selector">
-                            <div class="difficulty-option" data-value="easy">
-                                <div class="difficulty-icon">🥄</div>
-                                <div class="difficulty-label">Facile</div>
-                                <div class="difficulty-desc">Idéal pour débutants</div>
-                            </div>
-                            <div class="difficulty-option" data-value="medium">
-                                <div class="difficulty-icon">👨‍🍳</div>
-                                <div class="difficulty-label">Moyen</div>
-                                <div class="difficulty-desc">Quelques techniques requises</div>
-                            </div>
-                            <div class="difficulty-option" data-value="hard">
-                                <div class="difficulty-icon">🌟</div>
-                                <div class="difficulty-label">Expert</div>
-                                <div class="difficulty-desc">Pour les chefs expérimentés</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">
-                            Temps & Portions
-                        </label>
-                        <div class="time-inputs">
-                            <div class="time-input">
-                                <input type="number" value="{{ $recipe->temp_prepa }}" name="prep_time" class="form-input" placeholder="30" min="0" required>
-                                @error('prep_time')
-                                <span class="text-red-500">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="time-input">
-                                <input type="number" value="{{ $recipe->temp_cuission }}" name="cook_time" class="form-input" placeholder="45" min="0">
-                                @error('cook_time')
-                                <span class="text-red-500">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="time-input">
-                                <input type="number" value="{{ $recipe->personnes }}" name="servings" class="form-input" placeholder="4" min="1" required>
-                                @error('servings')
-                                <span class="text-red-500">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        Nom de la recette <span class="required">*</span>
+                    </label>
+                    <input type="text" name="title" class="form-input"
+                           value="{{ old('title', $recipe->title) }}"
+                           placeholder="Ex: Tarte aux Pommes" required>
+                    @error('title')
+                    <div class="helper-text" style="color: #dc3545;">{{ $message }}</div>
+                    @enderror
+                    <div class="helper-text">Donnez un nom clair et appétissant</div>
                 </div>
 
-                <!-- Image de la Recette -->
-                <div class="form-card">
-                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 32px;">
-                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--terracotta) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
-                            <i class="fas fa-image"></i>
-                        </div>
-                        <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--charcoal);">Image de la Recette</h2>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">
-                            Lien vers une image
-                        </label>
-                        <input type="url" value="{{ $recipe->image }}" name="image" class="form-input" placeholder="https://example.com/recipe-image.jpg">
-                        @error('image')
-                        <span class="text-red-500">{{ $message }}</span>
-                        @enderror
-                        <div class="helper-text">
-                            <i class="fas fa-link"></i>
-                            Vous devez aussi utiliser une URL d'image existante
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea name="description" class="form-textarea" 
+                              placeholder="Décrivez votre recette...">{{ old('description', $recipe->description) }}</textarea>
+                    @error('description')
+                    <div class="helper-text" style="color: #dc3545;">{{ $message }}</div>
+                    @enderror
                 </div>
 
-                <!-- Ingrédients -->
-                <div class="form-card">
-                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 32px;">
-                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--terracotta) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
-                            <i class="fas fa-carrot"></i>
-                        </div>
-                        <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--charcoal);">Ingrédients</h2>
-                    </div>
-
+                <div class="grid-2">
                     <div class="form-group">
                         <label class="form-label">
-                            Liste des ingrédients <span class="required">*</span>
+                            Catégorie <span class="required">*</span>
                         </label>
-                        <div id="ingredientsList" class="dynamic-list">
-                            @foreach($recipe->ingredients as $i => $ingredient)
-                            <div class="list-item">
-                                <div class="list-item-number">{{ $i + 1 }}</div>
-                                <div class="list-item-inputs">
-                                    <input type="text" class="form-input" value="{{ $ingredient->nom }}" placeholder="Ingrédient (ex: tomates)" name="ingredients[0][name]" required>
-                                    @error('ingredients')
-                                    <span class="text-red-500">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <button type="button" class="remove-btn" onclick="removeIngredient(this)">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
+                        <select name="category" class="form-select" required>
+                            <option value="">Sélectionnez...</option>
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id_category }}"
+                                    {{ old('category', $recipe->category_id) == $category->id_category ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
                             @endforeach
-                        </div>
-                        <button type="button" id="addIngredientBtn" class="add-item-btn">
-                            <i class="fas fa-plus"></i>
-                            Ajouter un ingrédient
-                        </button>
-                        <div class="helper-text">
-                            <i class="fas fa-lightbulb"></i>
-                            Pour les ingrédients optionnels, ajoutez "(optionnel)" dans le nom
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Étapes de Préparation -->
-                <div class="form-card">
-                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 32px;">
-                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--terracotta) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
-                            <i class="fas fa-list-ol"></i>
-                        </div>
-                        <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--charcoal);">Étapes de Préparation</h2>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">
-                            Instructions détaillées <span class="required">*</span>
-                        </label>
-                        <div id="stepsList" class="dynamic-list">
-                            @foreach($recipe->etapes as $etape)
-                            <div class="list-item">
-                                <div class="list-item-number">{{ $etape->numero_etape }}</div>
-                                <textarea class="form-textarea list-item-input" value="description" placeholder="Décrivez la première étape de préparation..." rows="3" name="steps[0]" required></textarea>
-                                @error('steps')
-                                <span class="text-red-500">{{ $message }}</span>
-                                @enderror
-                                <button type="button" class="remove-btn" onclick="removeStep(this)">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                            @endforeach
-                        </div>
-                        <button type="button" id="addStepBtn" class="add-item-btn">
-                            <i class="fas fa-plus"></i>
-                            Ajouter une étape
-                        </button>
-                        <div class="helper-text">
-                            <i class="fas fa-lightbulb"></i>
-                            Soyez précis : température, durée, conseils de cuisson...
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-card">
-                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 32px;">
-                        <div style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--burnt-orange) 0%, var(--terracotta) 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px;">
-                            <i class="fas fa-tags"></i>
-                        </div>
-                        <h2 style="font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--charcoal);">Tags et Informations</h2>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">
-                            Notes du chef (optionnel)
-                        </label>
-                        <textarea value="{{ $recipe->astuces }}" name="chef_notes" class="form-textarea" placeholder="Conseils personnels, variantes, astuces de conservation..." rows="4"></textarea>
-                        @error('chef_notes')
-                        <span class="text-red-500">{{ $message }}</span>
+                        </select>
+                        @error('category')
+                        <div class="helper-text" style="color: #dc3545;">{{ $message }}</div>
                         @enderror
                     </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Type de cuisine</label>
+                        <select name="cuisine" class="form-select">
+                            <option value="">Sélectionnez...</option>
+                            @foreach($cuisines as $cuisine)
+                            <option value="{{ $cuisine->id }}"
+                                    {{ old('cuisine', $recipe->cuisine_id) == $cuisine->id ? 'selected' : '' }}>
+                                {{ $cuisine->name }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Temps et Difficulté -->
+            <div class="card">
+                <h2 class="card-title">Temps et Difficulté</h2>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Préparation (min)</label>
+                        <input type="number" name="prep_time" class="form-input" 
+                               value="{{ old('prep_time', $recipe->prep_time) }}" 
+                               placeholder="30" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Cuisson (min)</label>
+                        <input type="number" name="cook_time" class="form-input" 
+                               value="{{ old('cook_time', $recipe->cook_time) }}" 
+                               placeholder="45" min="0">
+                    </div>
                 </div>
 
-                <!-- Boutons d'Action -->
-                <div class="action-buttons">
-                    <button type="button" id="previewBtn" class="btn btn-secondary">
-                        <i class="fas fa-eye"></i>
-                        Prévisualiser
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-paper-plane"></i>
-                        Modifier la Recette
-                    </button>
+                <div class="form-group">
+                    <label class="form-label">
+                        Difficulté <span class="required">*</span>
+                    </label>
+                    <div class="difficulty-options">
+                        <div class="difficulty-option {{ old('difficulty', $recipe->difficulty) == 'facile' ? 'selected' : '' }}" 
+                             data-value="easy">
+                            <div class="difficulty-icon">😊</div>
+                            <div class="difficulty-label">Facile</div>
+                        </div>
+                        <div class="difficulty-option {{ old('difficulty', $recipe->difficulty) == 'moyen' ? 'selected' : '' }}" 
+                             data-value="medium">
+                            <div class="difficulty-icon">🤔</div>
+                            <div class="difficulty-label">Moyen</div>
+                        </div>
+                        <div class="difficulty-option {{ old('difficulty', $recipe->difficulty) == 'difficile' ? 'selected' : '' }}" 
+                             data-value="hard">
+                            <div class="difficulty-icon">🎓</div>
+                            <div class="difficulty-label">Difficile</div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="difficulty" id="difficultyInput"
+                           value="{{ old('difficulty', $recipe->difficulty) }}" required>
+                    @error('difficulty')
+                    <div class="helper-text" style="color: #dc3545;">{{ $message }}</div>
+                    @enderror
                 </div>
-            </form>
-        </div>
-    </div>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <div class="toast-icon">
-            <i class="fas fa-check"></i>
-        </div>
-        <div>
-            <p style="font-weight: 600; font-size: 16px; color: var(--charcoal);">Recette créée !</p>
-            <p style="font-size: 14px; color: #666;">Redirection vers vos recettes...</p>
-        </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        Nombre de personnes <span class="required">*</span>
+                    </label>
+                    <input type="number" name="servings" class="form-input"
+                           value="{{ old('servings', $recipe->servings) }}"
+                           placeholder="4" min="1" required>
+                    @error('servings')
+                    <div class="helper-text" style="color: #dc3545;">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
+            <!-- Image -->
+            <div class="card">
+                <h2 class="card-title">Image de la Recette</h2>
+
+                <div class="form-group">
+                    <label class="form-label">URL de l'image</label>
+                    <input type="url" name="image_url" id="imageUrlInput" class="form-input" 
+                           value="{{ old('image_url', $recipe->image) }}" 
+                           placeholder="https://exemple.com/image.jpg">
+                    <div class="helper-text">Collez le lien d'une image de votre recette</div>
+                </div>
+
+                <div id="imagePreviewContainer" style="{{ $recipe->image ? '' : 'display: none;' }} margin-top: 16px;">
+                    <div class="image-preview">
+                        <img id="imagePreview" src="{{ $recipe->image ?? '' }}" alt="Aperçu">
+                        <button type="button" class="image-remove" onclick="removeImage()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ingrédients -->
+            <div class="card">
+                <h2 class="card-title">Ingrédients</h2>
+
+                <div id="ingredientsList">
+                    @forelse($recipe->ingredients ?? [] as $index => $ingredient)
+                    <div class="list-item">
+                        <div class="list-number">{{ $index + 1 }}</div>
+                        <div class="list-inputs">
+                            <input type="text" class="form-input" 
+                                   value="{{ old("ingredients.{$index}.name", $ingredient->name) }}"
+                                   placeholder="Farine" name="ingredients[{{ $index }}][name]">
+                        </div>
+                        <button type="button" class="remove-btn" onclick="removeItem(this)">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    @empty
+                    <div class="list-item">
+                        <div class="list-number">1</div>
+                        <div class="list-inputs">
+                            <input type="text" class="form-input" placeholder="Farine" name="ingredients[0][name]">
+                        </div>
+                        <button type="button" class="remove-btn" onclick="removeItem(this)">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    @endforelse
+                </div>
+
+                <button type="button" class="add-btn" onclick="addIngredient()">
+                    <i class="fas fa-plus"></i> Ajouter un ingrédient
+                </button>
+            </div>
+
+            <!-- Étapes -->
+            <div class="card">
+                <h2 class="card-title">Étapes de Préparation</h2>
+
+                <div id="stepsList">
+                    @forelse($recipe->steps ?? [] as $index => $step)
+                    <div class="form-group">
+                        <label class="form-label">Étape {{ $index + 1 }}</label>
+                        <textarea class="form-textarea" name="steps[{{ $index }}]" 
+                                  placeholder="Décrivez cette étape..." rows="3">{{ old("steps.{$index}", $step->description) }}</textarea>
+                    </div>
+                    @empty
+                    <div class="form-group">
+                        <label class="form-label">Étape 1</label>
+                        <textarea class="form-textarea" name="steps[0]"
+                                  placeholder="Décrivez cette étape..." rows="3"></textarea>
+                    </div>
+                    @endforelse
+                </div>
+
+                <button type="button" class="add-btn" onclick="addStep()">
+                    <i class="fas fa-plus"></i> Ajouter une étape
+                </button>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="btn-group">
+                <a href="{{ route('myRecipe') }}" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Annuler
+                </a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Enregistrer les modifications
+                </button>
+            </div>
+        </form>
     </div>
 
     <script>
-        // Mobile menu toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const sidebar = document.getElementById('sidebar');
+        // Initialize ingredient and step counts based on existing data
+        let ingredientCount = document.querySelectorAll('#ingredientsList .list-item').length;
+        let stepCount = document.querySelectorAll('#stepsList .form-group').length;
 
-        if (window.innerWidth <= 1024) {
-            menuToggle.style.display = 'block';
+        // Image preview functionality
+        const imageUrlInput = document.getElementById('imageUrlInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+
+        imageUrlInput.addEventListener('input', function() {
+            const url = this.value.trim();
+            if (url) {
+                imagePreview.src = url;
+                imagePreviewContainer.style.display = 'block';
+            } else {
+                imagePreviewContainer.style.display = 'none';
+            }
+        });
+
+        function removeImage() {
+            imageUrlInput.value = '';
+            imagePreviewContainer.style.display = 'none';
+            imagePreview.src = '';
         }
-
-        window.addEventListener('resize', () => {
-            menuToggle.style.display = window.innerWidth <= 1024 ? 'block' : 'none';
-        });
-
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-        });
 
         // Difficulty selector
         document.querySelectorAll('.difficulty-option').forEach(option => {
             option.addEventListener('click', function() {
-                document.querySelectorAll('.difficulty-option').forEach(opt => {
-                    opt.classList.remove('selected');
-                });
+                document.querySelectorAll('.difficulty-option').forEach(opt => opt.classList.remove('selected'));
                 this.classList.add('selected');
                 document.getElementById('difficultyInput').value = this.dataset.value;
             });
         });
 
-        // Set default difficulty to "medium"
-        document.querySelector('.difficulty-option[data-value="medium"]').classList.add('selected');
-        document.getElementById('difficultyInput').value = 'medium';
-
-        // Image upload functionality
-        const imageInput = document.getElementById('imageInput');
-        const previewImg = document.getElementById('previewImg');
-
-        
-
-
-        
-        let ingredientCount = document.querySelectorAll('.list-item').lenght;
-        console.log(ingredientCount)
-        document.getElementById('addIngredientBtn').addEventListener('click', function() {
-            ingredientCount++;
-            const ingredientsList = document.getElementById('ingredientsList');
-            const newItem = document.createElement('div');
-            newItem.className = 'list-item';
-            newItem.innerHTML = `
-                <div class="list-item-number">${ingredientCount}</div>
-                <div class="list-item-inputs">
-                    <input type="text" class="form-input" placeholder="Ingrédient" name="ingredients[${ingredientCount-1}][name]" required>
+        // Add ingredient
+        function addIngredient() {
+            const list = document.getElementById('ingredientsList');
+            const item = document.createElement('div');
+            item.className = 'list-item';
+            item.innerHTML = `
+                <div class="list-number">${ingredientCount + 1}</div>
+                <div class="list-inputs">
+                    <input type="text" class="form-input" placeholder="Farine" name="ingredients[${ingredientCount}][name]">
                 </div>
-                <button type="button" class="remove-btn" onclick="removeIngredient(this)">
-                    <i class="fas fa-trash-alt"></i>
+                <button type="button" class="remove-btn" onclick="removeItem(this)">
+                    <i class="fas fa-times"></i>
                 </button>
             `;
-            ingredientsList.appendChild(newItem);
-            updateIngredientNumbers();
-        });
-
-        function removeIngredient(btn) {
-            const item = btn.closest('.list-item');
-            item.remove();
-            updateIngredientNumbers();
+            list.appendChild(item);
+            ingredientCount++;
+            updateNumbers('ingredientsList');
         }
 
-        function updateIngredientNumbers() {
-            const items = document.querySelectorAll('#ingredientsList .list-item');
-            items.forEach((item, index) => {
-                item.querySelector('.list-item-number').textContent = index + 1;
-                const quantityInput = item.querySelector('input[name^="ingredients"]');
-                const nameInput = item.querySelector('input[name$="[name]"]');
-                if (quantityInput) quantityInput.name = `ingredients[${index}][quantity]`;
-                if (nameInput) nameInput.name = `ingredients[${index}][name]`;
-            });
-            ingredientCount = items.length;
-        }
-
-        // Steps management
-        let stepCount = 1;
-        document.getElementById('addStepBtn').addEventListener('click', function() {
+        // Add step
+        function addStep() {
+            const list = document.getElementById('stepsList');
+            const group = document.createElement('div');
+            group.className = 'form-group';
+            group.innerHTML = `
+                <label class="form-label">Étape ${stepCount + 1}</label>
+                <textarea class="form-textarea" name="steps[${stepCount}]" placeholder="Décrivez cette étape..." rows="3"></textarea>
+            `;
+            list.appendChild(group);
             stepCount++;
-            const stepsList = document.getElementById('stepsList');
-            const newItem = document.createElement('div');
-            newItem.className = 'list-item';
-            newItem.innerHTML = `
-                <div class="list-item-number">${stepCount}</div>
-                <textarea class="form-textarea list-item-input" placeholder="Décrivez cette étape..." rows="3" name="steps[${stepCount-1}]" required></textarea>
-                <button type="button" class="remove-btn" onclick="removeStep(this)">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            `;
-            stepsList.appendChild(newItem);
-            updateStepNumbers();
-        });
-
-        function removeStep(btn) {
-            const item = btn.closest('.list-item');
-            item.remove();
-            updateStepNumbers();
         }
 
-        function updateStepNumbers() {
-            const items = document.querySelectorAll('#stepsList .list-item');
+        // Remove item
+        function removeItem(btn) {
+            const list = btn.closest('#ingredientsList');
+            const items = list.querySelectorAll('.list-item');
+            
+            // Don't allow removing if only one item
+            if (items.length > 1) {
+                btn.closest('.list-item').remove();
+                updateNumbers('ingredientsList');
+                ingredientCount--;
+            } else {
+                alert('Vous devez avoir au moins un ingrédient');
+            }
+        }
+
+        // Update numbers
+        function updateNumbers(listId) {
+            const items = document.getElementById(listId).querySelectorAll('.list-number');
             items.forEach((item, index) => {
-                item.querySelector('.list-item-number').textContent = index + 1;
-                const textarea = item.querySelector('textarea');
-                if (textarea) textarea.name = `steps[${index}]`;
+                item.textContent = index + 1;
             });
-            stepCount = items.length;
         }
-        // Save draft functionality
-        document.getElementById('saveDraftBtn').addEventListener('click', function() {
-            // Simulate saving to localStorage
-            const formData = new FormData(document.getElementById('recipeForm'));
-            const data = Object.fromEntries(formData);
-            localStorage.setItem('recipeDraft', JSON.stringify(data));
 
-            document.getElementById('successMessage').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
-        });
-
-        
-        document.getElementById('previewBtn').addEventListener('click', function() {
-            // Here you would normally open a preview modal or page
-            alert('Prévisualisation - Cette fonctionnalité ouvrirait un aperçu de votre recette');
-        });
-
-        // Load draft if exists
-        window.addEventListener('load', function() {
-            const draft = localStorage.getItem('recipeDraft');
-            if (draft) {
-                if (confirm('Vous avez un brouillon non sauvegardé. Voulez-vous le charger ?')) {
-                    const data = JSON.parse(draft);
-                    // Here you would populate the form with draft data
-                }
+        // Form validation
+        document.getElementById('recipeForm').addEventListener('submit', function(e) {
+            const difficulty = document.getElementById('difficultyInput').value;
+            if (!difficulty) {
+                e.preventDefault();
+                alert('Veuillez sélectionner un niveau de difficulté');
+                return false;
             }
         });
     </script>
